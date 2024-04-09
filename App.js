@@ -11,6 +11,7 @@ import { useFonts } from "expo-font";
 export default function App() {
  const [coordinates, setCoordinates]= useState();
  const [weather, setWeather] = useState();
+ const [city, setCity] = useState();
  const [isFontLoaded] = useFonts({
     "Alata-Regular": require("./assets/fonts/Alata-Regular.ttf"),
  }); 
@@ -22,6 +23,7 @@ export default function App() {
   useEffect(()=>{
    if(coordinates){
     fetchWeatherByCoords(coordinates);
+    fetchCityByCoords(coordinates);
    }
   }, [coordinates]);
 
@@ -29,6 +31,12 @@ export default function App() {
     const weatherResponse = await WeatherAPI.fetchWeatherByCoords(coords);
     setWeather(weatherResponse);
   }
+
+  async function fetchCityByCoords(coords){
+    const cityResponse = await WeatherAPI.fetchCityByCoords(coords);
+    setCity(cityResponse);
+  }
+  
 
   async function getUserCoordinates(){
     const{ status } = await requestForegroundPermissionsAsync();
@@ -41,7 +49,7 @@ export default function App() {
     }
   }
 
-  console.log(coordinates);
+  // console.log(coordinates);
   // console.log(weather);
 
 
@@ -49,7 +57,7 @@ export default function App() {
     <ImageBackground imageStyle={s.img} style={s.img_background} source={backgroundImg}>   
       <SafeAreaProvider >
         <SafeAreaView style={s.container}>
-          {isFontLoaded && weather && <Home weather={weather} />}
+          {isFontLoaded && weather && <Home city={city} weather={weather} />}
         </SafeAreaView>
       </SafeAreaProvider>
     </ImageBackground>
