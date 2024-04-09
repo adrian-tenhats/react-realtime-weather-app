@@ -27,9 +27,8 @@ export const s = StyleSheet.create({
 
     },
     image: {
-        height:50, 
-        width: 50, 
-        backgroundColor:"white"
+        height:90, 
+        width: 90, 
     }
    
 });
