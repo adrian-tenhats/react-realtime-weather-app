@@ -12,11 +12,5 @@ export const s = StyleSheet.create({
     },
     advanced:{
         flex: 1,       
-    },
-    txt:{
-        fontSize: 30,
-        color: "white"
-    }
-    
-    
+    }   
 })
