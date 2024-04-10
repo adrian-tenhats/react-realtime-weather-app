@@ -5,7 +5,7 @@ import { s } from "./Home.style";
 import { getWeatherInterpretation} from "../../utils/meteo-utils"
 import { MeteoAdvanced } from '../../components/MeteoAdvanced/MeteoAdvanced';
 
-export default function Home({ weather, city }) {
+export function Home({ weather, city }) {
     const currentWeather = weather.current_weather;
     const currentInterpretation = getWeatherInterpretation(currentWeather.weathercode);
     
@@ -13,7 +13,11 @@ export default function Home({ weather, city }) {
         <>        
             <View style={s.basic}>
                  {/* <Txt onPress={()=> console.log("hello")} style={{ fontSize: 30}}>Basic Data</Txt>  */}
-                <MeteoBasic city={city} interpretation={currentInterpretation} temperature={Math.round(currentWeather.temperature)}/>
+                <MeteoBasic 
+                    dailyWeather={weather.daily}
+                    city={city} 
+                    interpretation={currentInterpretation} 
+                    temperature={Math.round(currentWeather.temperature)}/>
             </View>
             <View style={s.searchbar_container}>
                 <Txt>
