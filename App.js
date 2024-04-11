@@ -69,7 +69,7 @@ export default function App() {
         <SafeAreaProvider >
           <SafeAreaView style={s.container}>
             {isFontLoaded && weather && (
-              <Stack.Navigator screenOptions={{headerShown: false, animation:"fade"}} initialRouteName='Forecasts'>
+              <Stack.Navigator screenOptions={{headerShown: false, animation:"fade"}} initialRouteName='Home'>
                 <Stack.Screen name="Home">
                   {() => <Home city={city} weather={weather} />}
                 </Stack.Screen>
