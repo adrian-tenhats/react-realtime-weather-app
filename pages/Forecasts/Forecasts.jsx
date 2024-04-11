@@ -22,7 +22,6 @@ export function Forecasts({}) {
               month: "numeric"
             })
 
-
             return (
               <ForecastListItem 
                 key={time}

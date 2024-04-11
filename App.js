@@ -1,4 +1,4 @@
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
+import { Alert, ImageBackground, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { s } from "./App.style";
 import {Home} from './pages/Home/Home';
@@ -47,6 +47,14 @@ export default function App() {
     setCity(cityResponse);
   }
   
+  async function fetchCoordsByCity(city){
+    try{
+      const coordsResponse = await WeatherAPI.fetchCoordsByCity(city);
+      setCoordinates(coordsResponse);
+    } catch(err){
+      Alert.alert("Not found", err);
+    }  
+  }
 
   async function getUserCoordinates(){
     const{ status } = await requestForegroundPermissionsAsync();
@@ -71,7 +79,10 @@ export default function App() {
             {isFontLoaded && weather && (
               <Stack.Navigator screenOptions={{headerShown: false, animation:"fade"}} initialRouteName='Home'>
                 <Stack.Screen name="Home">
-                  {() => <Home city={city} weather={weather} />}
+                  {() => <Home 
+                          city={city} 
+                          weather={weather} 
+                          onSubmitSearch={fetchCoordsByCity}/>}
                 </Stack.Screen>
                 <Stack.Screen name="Forecasts" component={Forecasts} />
               </Stack.Navigator>
